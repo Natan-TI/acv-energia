@@ -1,0 +1,30 @@
+{
+  "versao": "v1",
+  "divisao": "test",
+  "precisao": 0.9653,
+  "recall": 0.9142,
+  "mAP50": 0.9551,
+  "mAP50_95": 0.8132,
+  "por_classe": {
+    "freezer_aberto": {
+      "mAP50": 0.995,
+      "mAP50_95": 0.995
+    },
+    "freezer_fechado": {
+      "mAP50": 0.995,
+      "mAP50_95": 0.9208
+    },
+    "geladeira_aberta": {
+      "mAP50": 0.9655,
+      "mAP50_95": 0.6976
+    },
+    "geladeira_fechada": {
+      "mAP50": 0.8647,
+      "mAP50_95": 0.6393
+    }
+  },
+  "tempo_por_imagem_ms": 6.1,
+  "quadros_por_segundo": 163.9,
+  "epocas_pedidas": 100,
+  "tamanho_imagem": 640
+}

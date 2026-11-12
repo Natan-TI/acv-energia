@@ -1,0 +1,51 @@
+# Configuração da detecção de portas de refrigeração abertas.
+# Os identificadores seguem o contrato de dados do grupo (loja_id, equipamento_id).
+
+loja_id: padaria-01
+
+modelo: models/best.pt
+confianca_minima: 0.5
+tamanho_imagem: 640          # o mesmo tamanho usado no treino
+
+# Nome de cada classe do modelo (igual ao usado na anotação) e o que ela significa.
+classes:
+  geladeira_aberta:  {equipamento: expositor, estado: aberto}
+  geladeira_fechada: {equipamento: expositor, estado: fechado}
+  freezer_aberto:    {equipamento: freezer,   estado: aberto}
+  freezer_fechado:   {equipamento: freezer,   estado: fechado}
+
+regras:
+  limite_alerta_s: 60          # porta aberta por mais tempo que isso vira alerta
+  confirmacao_s: 0.7           # tempo que o novo estado precisa durar para valer (evita oscilação)
+  tempo_perdido_s: 15          # sem ver o equipamento por esse tempo, o evento é encerrado
+  iou_mesmo_equipamento: 0.3   # sobreposição mínima para considerar que é o mesmo equipamento
+  iou_tipo_confundido: 0.6     # acima disso, geladeira e freezer no mesmo lugar são o mesmo objeto
+  duracao_minima_evento_s: 2   # aberturas mais curtas que isso não viram evento
+
+# Opcional: detecta pessoas com o modelo pré-treinado (COCO) e não alerta enquanto
+# houver um cliente na frente da geladeira. Deixa o processamento mais lento.
+pessoas:
+  ativar: false
+  modelo: yolo11n.pt
+  confianca_minima: 0.4
+  tolerancia_s: 5
+
+# ATENÇÃO: valores provisórios, sem fonte, usados só para os dados simulados do grupo
+# baterem entre si. Trocar por valores com fonte antes de usar em relatório ou no pitch
+# (tarifa da distribuidora na ANEEL, potência no selo PROCEL do equipamento).
+custo:
+  tarifa_rs_kwh: 0.90
+  equipamentos:
+    expositor: {potencia_kw: 0.50, fator_perda: 0.30}
+    freezer:   {potencia_kw: 0.50, fator_perda: 0.30}
+
+alerta:
+  som: true
+  repetir_a_cada_s: 10
+
+eventos:
+  pasta: eventos
+  # Integração opcional com o painel (entrega de DevOps). A chave NÃO fica aqui:
+  # defina a variável de ambiente PAINEL_API_KEY.
+  enviar_para_api: false
+  api_url: http://localhost:8000

@@ -1,0 +1,27 @@
+# Ambiente e caches
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Dados brutos: vídeos e imagens das lojas não vão para o repositório (LGPD e tamanho).
+# Só as amostras em data/amostras/ são versionadas.
+data/videos/
+data/frames/
+data/dataset/
+
+# Saídas de treino e de execução
+runs/
+eventos/*.jsonl
+results/*.mp4
+
+# Pesos baixados automaticamente pelo Ultralytics (o modelo treinado fica em models/best.pt)
+yolo11*.pt
+yolov8*.pt
+
+# Segredos
+.env
+
+# Imagens extraídas dos vídeos novos e vídeos de demonstração com as marcações
+data/frames_novos/
+results/demo/

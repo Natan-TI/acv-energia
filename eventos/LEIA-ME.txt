@@ -1,0 +1,1 @@
+Eventos gerados pela aplicacao, um arquivo por dia (eventos-AAAA-MM-DD.jsonl).

@@ -1,0 +1,8 @@
+# O PyTorch com suporte a GPU é instalado à parte, antes deste arquivo (veja o README).
+ultralytics>=8.3
+opencv-python>=4.10
+pillow>=10.1
+pyyaml>=6
+requests>=2.31
+pytest>=8
+ipykernel>=6.29
