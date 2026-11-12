@@ -1,4 +1,4 @@
-# Energia que dá Lucro · Visão Computacional
+# ⚡ Energia que dá Lucro · Visão Computacional
 
 Detecção em tempo real de **portas de geladeiras e freezers abertas** em pequenos comércios, usando as
 câmeras de segurança que a loja já tem. Cada porta esquecida aberta vira um alerta na hora e um evento
@@ -6,12 +6,23 @@ com o custo estimado do desperdício.
 
 Entrega da disciplina **Applied Computer Vision** · FIAP · Global Solution 2026.2 · CitizenTech · 4ES
 
-**Integrantes:** Gustavo Henrique Santos Bonfim (RM98864) · João Pedro Marques (RM98307) ·
-Kayky Paschoal Ribeiro (RM99929) · Lucas Yuji Farias Umada (RM99757) · Natan Eguchi dos Santos (RM98720)
+## 👥 Integrantes
 
-**Vídeo de demonstração:** https://youtu.be/wyOPgvcwENY · **Relatório:** [docs/relatorio.pdf](docs/relatorio.pdf) · **Repositório:** https://github.com/Natan-TI/acv-energia
+| Nome | RM |
+|---|---|
+| Gustavo Henrique Santos Bonfim | RM98864 |
+| João Pedro Marques | RM98307 |
+| Kayky Paschoal Ribeiro | RM99929 |
+| Lucas Yuji Farias Umada | RM99757 |
+| Natan Eguchi dos Santos | RM98720 |
 
-## Ficha Técnica do MVP
+## 🔗 Links
+
+- 🎬 **Vídeo de demonstração:** https://youtu.be/wyOPgvcwENY
+- 📄 **Relatório:** [docs/relatorio.pdf](docs/relatorio.pdf)
+- 💻 **Repositório:** https://github.com/Natan-TI/acv-energia
+
+## 📋 Ficha Técnica do MVP
 
 | Campo | Conteúdo |
 |---|---|
@@ -26,7 +37,7 @@ Kayky Paschoal Ribeiro (RM99929) · Lucas Yuji Farias Umada (RM99757) · Natan E
 | Indicadores de impacto | R$ e kWh de desperdício evitados por loja ao mês · tempo médio de porta aberta · percentual de alertas resolvidos em poucos minutos. |
 | ODS conectados | ODS 7 (energia acessível e limpa), ODS 12 (consumo responsável), ODS 9, ODS 11 e ODS 13. |
 
-## Como funciona
+## ⚙️ Como funciona
 
 1. A câmera (webcam, vídeo gravado ou câmera de rede) entrega os quadros.
 2. O modelo YOLO detecta cada equipamento e diz se a porta está aberta ou fechada.
@@ -52,7 +63,7 @@ Um evento por linha, em `eventos/eventos-AAAA-MM-DD.jsonl`, no formato combinado
 O custo é uma estimativa: `potência (kW) × fator de perda × horas × tarifa (R$/kWh)`. Os valores ficam em
 `config.yaml`. **Os valores atuais são provisórios e não têm fonte.**
 
-## Estrutura
+## 📁 Estrutura
 
 ```
 config.yaml            classes, regras de alerta e parâmetros de custo
@@ -70,7 +81,7 @@ docs/                  guia de coleta e anotação, e base do relatório
 tests/                 testes automáticos
 ```
 
-## Instalação
+## 🛠️ Instalação
 
 Requer Python 3.10 ou mais recente. Para treinar, uma placa de vídeo NVIDIA ajuda muito.
 
@@ -93,7 +104,7 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
 pip install -r requirements.txt
 ```
 
-## Uso
+## ▶️ Uso
 
 ### 1. Extrair imagens dos vídeos
 
@@ -137,7 +148,7 @@ Teclas: `Q` ou `Esc` para sair.
 python src/resumo.py
 ```
 
-## Testes
+## 🧪 Testes
 
 ```bash
 python -m pytest
@@ -146,7 +157,7 @@ python -m pytest
 Os testes cobrem as regras de negócio e a aplicação de ponta a ponta com um vídeo sintético e um
 detector falso. Eles não precisam de câmera, de GPU nem do modelo treinado.
 
-## Problemas conhecidos
+## 🩹 Problemas conhecidos
 
 **"WinError 206: O nome do arquivo ou a extensão é muito grande"** ao importar o PyTorch: o projeto está em uma
 pasta de caminho longo e algum arquivo do ambiente `.venv` passou do limite de 260 caracteres do Windows.
@@ -158,7 +169,7 @@ computadores com Windows que têm a variável de sistema `OPENSSL_ia32cap` defin
 já removem essa variável do próprio processo. Se você treinar pela linha de comando (`yolo detect train ...`),
 rode antes, no mesmo terminal do PowerShell: `Remove-Item Env:OPENSSL_ia32cap`.
 
-## Resultados
+## 📊 Resultados
 
 Conjunto de 472 imagens anotadas (1.132 com aumento de dados), YOLO11n com ajuste fino por 100 épocas.
 Métricas no conjunto de teste (48 imagens):
@@ -172,19 +183,19 @@ um evento em cada um. Os detalhes estão em [docs/relatorio.md](docs/relatorio.m
 
 ![Alerta disparado](docs/imagens/alerta-disparado.jpg)
 
-## Privacidade (LGPD)
+## 🔒 Privacidade (LGPD)
 
 - O processamento é feito no computador da loja.
 - Nenhuma imagem é armazenada ou enviada pela aplicação: só os eventos (equipamento, horário, duração e custo).
 - O modelo não identifica pessoas. A detecção opcional de pessoas só verifica se há alguém na frente do equipamento.
 - Os vídeos usados no treino foram gravados com autorização e não fazem parte do repositório.
 
-## IA responsável
+## 🤝 IA responsável
 
 O sistema só avisa. Quem decide fechar a porta é o comerciante. O custo mostrado é uma estimativa, e os
 parâmetros usados no cálculo ficam visíveis em `config.yaml`.
 
-## Limitações conhecidas
+## ⚠️ Limitações conhecidas
 
 - A maior parte das imagens vem de uma única geladeira doméstica, e não há gravações dentro de um comércio.
 - Há poucos exemplos de freezer aberto em relação às outras classes.
@@ -192,6 +203,6 @@ parâmetros usados no cálculo ficam visíveis em `config.yaml`.
 - As imagens de teste vêm dos mesmos vídeos do treino, o que deixa as métricas otimistas.
 - O custo estimado usa parâmetros provisórios, sem medição real.
 
-## Licenças
+## 📜 Licenças
 
 Este projeto usa o Ultralytics YOLO, distribuído sob a licença AGPL-3.0.
